@@ -1,6 +1,6 @@
 # This file defines a GitHub Actions workflow that runs grading when a student pushes to their repository.
 
-name: Grading
+name: Grading XXX
 
 on:
   - push
