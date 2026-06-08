@@ -1,5 +1,8 @@
 package part01;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * The class contains empty methods and methods with known issues that need to
  * be fixed.
@@ -23,12 +26,12 @@ public class StringBasics {
      * @return The truncated text.
      */
     public String truncate(String text, int maxLength) {
-        // TODO: Fix this method
-
-        if (text.length() > maxLength) {
-            text.substring(0, maxLength);
+        // if the text is shorter or equal to the maximum length, the text is returned as is
+        if (text.length() <= maxLength) {
+            return text;
         }
-        return text;
+        
+        return text.substring(0, maxLength);
     }
 
     /**
@@ -39,12 +42,7 @@ public class StringBasics {
      * @return `true` if the text is "yes" (case-insensitive), otherwise `false`
      */
     public boolean parseYesOrNo(String text) {
-        // FIXME: this seems to always return false, even when the `text` is "yes"
-
-        if (text.toLowerCase() == "yes") {
-            return true;
-        }
-        return false;
+        return text.equalsIgnoreCase("yes");
     }
 
     /**
@@ -61,7 +59,16 @@ public class StringBasics {
      * @return "fizz", "buzz", "fizzbuzz" or the given number as a string.
      */
     public String getFizzBuzz(int number) {
-        return "fizzbuzz"; // TODO: implement this method
+        if (number % 3 == 0 && number % 5 == 0) {
+            return "FizzBuzz";
+        }
+        if (number % 3 == 0) {
+            return "Fizz";
+        }
+        if (number % 5 == 0) {
+            return "Buzz";
+        }
+        return String.valueOf(number);
     }
 
     /**
@@ -80,7 +87,20 @@ public class StringBasics {
      * @return The text centered in a string of the given width: " Java ".
      */
     public String center(String text, int width) {
-        return null; // TODO: implement this method
+        // if the given text is longer than the given width, the text is returned as is
+        if (text.length() >= width) {
+            return text;
+        }
+
+        int totalPadding = width - text.length();
+
+        // the leftPad and rightPad may be different, if the totalPadding is not even
+        int leftPad = totalPadding / 2;
+        int rightPad = totalPadding - leftPad;
+
+        // The `repeat` method is a nice way to repeat any string. Although there are
+        // other ways to repeat the space, too.
+        return " ".repeat(leftPad) + text + " ".repeat(rightPad);
     }
 
     /**
@@ -105,9 +125,19 @@ public class StringBasics {
      * @return The text formatted so that each line is centered separately.
      */
     public String centerMultiLine(String text, int lineWidth) {
-        // hint: you can split the text by newlines and use your `center` method to
-        // center each line separately
+        String[] lines = text.split("\n");
 
-        return null; // Implement this extra method if you want. It's not required.
+        // a temporary list for collecting centered lines to
+        List<String> centered = new ArrayList<>();
+        
+        for (String line : lines) {
+            // using the method we implemented earlier, centering is easy
+            centered.add(center(line, lineWidth));
+        }
+
+        // String.join "joins" the given list of strings adding the given delimiter in
+        // between of each string in the list. In our case, the centered lines are
+        // joined with a newline:
+        return String.join("\n", centered);
     }
 }
