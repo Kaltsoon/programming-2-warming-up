@@ -5,6 +5,8 @@ set -uo pipefail
 SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 CONFIG_FILE="${SCRIPT_DIR}/config.json"
 
+echo "hello world!"
+
 total_score=0
 max_score=0
 
